@@ -19,7 +19,7 @@ module.exports.models = {
   ***************************************************************************/
   // connection: 'localDiskDb',
   connection:  'PostgresqlServer',
-  migrate: 'safe'
+  migrate: 'alter'
   /***************************************************************************
   *                                                                          *
   * How and whether Sails will attempt to automatically rebuild the          *

@@ -39,12 +39,22 @@ module.exports = {
    * 'UserController.signup'
    */
   processSignup: (req, res) => {
-    var newUser = new User({
-      username: req.username,
-      email: req.email,
-      password: req.password
+    var newUser = {
+      username: req.param('username'),
+      email: req.param('email'),
+      password: req.param('password')
+    };
+    console.log(newUser);
+    User.create(newUser).exec( (err,records) =>{
+      if(err) {
+        throw Error(err);
+      }else {
+        console.log(records);
+      }
     });
-    return null;
+    req.flash('success_msg', 'You are registed and can now login');
+
+    res.redirect('/');
   },
 };
 
