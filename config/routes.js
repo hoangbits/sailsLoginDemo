@@ -21,7 +21,6 @@
  */
 
 module.exports.routes = {
-
   /***************************************************************************
   *                                                                          *
   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
@@ -33,7 +32,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'homepage'
+    view: 'homepage',
   },
 
   /***************************************************************************
@@ -48,9 +47,8 @@ module.exports.routes = {
   'get /signup': {
     view: 'user/signup',
     locals: {
-      layout: 'template'
-    }
+      layout: 'template',
+    },
   },
-  'post /signup': 'UserController.processSignup'
-
+  'post /signup': 'UserController.processSignup',
 };

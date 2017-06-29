@@ -6,14 +6,12 @@
  */
 
 module.exports = {
-
   attributes: {
+    username: { type: 'string' },
 
-    username : { type: 'string' },
+    email: { type: 'string' },
 
-    email : { type: 'string' },
+    password: { type: 'string' },
+  },
 
-    password : { type: 'string' }
-  }
 };
-

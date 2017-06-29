@@ -39,6 +39,11 @@ module.exports = {
    * 'UserController.signup'
    */
   processSignup: (req, res) => {
+    var newUser = new User({
+      username: req.username,
+      email: req.email,
+      password: req.password
+    });
     return null;
   },
 };
