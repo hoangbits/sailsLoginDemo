@@ -79,7 +79,7 @@ module.exports.connections = {
     host: 'localhost',
     user: 'postgres', // optional
     password: 'root', // optional
-    database: 'sailsLoginDemo' //optional
+    database: 'sailslogindemo' //optional
   }
 
 

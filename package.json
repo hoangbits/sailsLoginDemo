@@ -37,5 +37,9 @@
     "url": "git://github.com/legiahoang/sailsLoginDemo.git"
   },
   "author": "hoang",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "eslint": "^4.1.1",
+    "eslint-config-google": "^0.8.0"
+  }
 }

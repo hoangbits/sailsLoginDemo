@@ -6,15 +6,14 @@
  */
 
 module.exports = {
-	
 
 
   /**
    * `UserController.index()`
    */
-  index: function (req, res) {
+  index: (req, res) => {
     return res.json({
-      todo: 'index() is not implemented yet!'
+      todo: 'index() is not implemented yet!',
     });
   },
 
@@ -22,20 +21,25 @@ module.exports = {
   /**
    * `UserController.login()`
    */
-  login: function (req, res) {
-    return res.json({
-      todo: 'login() is not implemented yet!'
-    });
+  login: (req, res) => {
+    return res.json({todo: 'login() is not implemented yet!',});
   },
 
 
   /**
    * `UserController.logout()`
    */
-  logout: function (req, res) {
+  logout: (req, res) => {
     return res.json({
-      todo: 'logout() is not implemented yet!'
+      todo: 'logout() is not implemented yet!',
     });
-  }
+  },
+
+  /**
+   * 'UserController.signup'
+   */
+  processSignup: (req, res) => {
+    return null;
+  },
 };
 

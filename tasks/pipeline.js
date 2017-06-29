@@ -27,8 +27,9 @@ var jsFilesToInject = [
 
   // Load sails.io before everything else
   'js/dependencies/sails.io.js',
-
-  // Dependencies like jQuery, or Angular are brought in here
+    //load jquery before bootstrap
+    'js/dependencies/jquery-3.2.1.min.js',
+  // Dependencies like jQuery, or Angular are brought in here --- also bootstrap
   'js/dependencies/**/*.js',
 
   // All of the rest of your client-side js files
@@ -47,7 +48,7 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+  'templates/**/*.html',
 ];
 
 
