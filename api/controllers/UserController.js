@@ -6,8 +6,6 @@
  */
 
 module.exports = {
-
-
   /**
    * `UserController.index()`
    */
@@ -17,14 +15,12 @@ module.exports = {
     });
   },
 
-
   /**
    * `UserController.login()`
    */
   login: (req, res) => {
-    return res.json({todo: 'login() is not implemented yet!',});
+    return res.json({todo: 'login() is not implemented yet!'});
   },
-
 
   /**
    * `UserController.logout()`
@@ -39,22 +35,21 @@ module.exports = {
    * 'UserController.signup'
    */
   processSignup: (req, res) => {
-    var newUser = {
+    let newUser = {
       username: req.param('username'),
       email: req.param('email'),
-      password: req.param('password')
+      password: req.param('password'),
     };
-    console.log(newUser);
-    User.create(newUser).exec( (err,records) =>{
-      if(err) {
-        throw Error(err);
-      }else {
-        console.log(records);
-      }
-    });
+
+    User.create(newUser)
+      .exec((err, records) => {
+        if (err) {
+          throw Error(err);
+        }
+        // sails.log(records);
+      })
     req.flash('success_msg', 'You are registed and can now login');
 
     res.redirect('/');
   },
 };
-
