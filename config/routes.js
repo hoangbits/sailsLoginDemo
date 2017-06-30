@@ -51,4 +51,11 @@ module.exports.routes = {
     },
   },
   'post /signup': 'UserController.processSignup',
+  'get /login': {
+    view: 'user/login',
+    locals: {
+      layout: 'template',
+    },
+  },
+  // 'post /login': 'UserController.login',
 };
