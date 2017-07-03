@@ -30,11 +30,18 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
+  //
+  // '/': {
+  //   view: 'homepage',
+  // },
+  //
 
   '/': {
-    view: 'homepage',
+    view: 'user/login',
+    locals: {
+      layout: 'template',
+    }
   },
-
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
@@ -57,5 +64,5 @@ module.exports.routes = {
       layout: 'template',
     },
   },
-  // 'post /login': 'UserController.login',
+  'post /login': 'UserController.login',
 };

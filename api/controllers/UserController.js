@@ -19,6 +19,7 @@ module.exports = {
    * `UserController.login()`
    */
   login: (req, res) => {
+
     return res.json({todo: 'login() is not implemented yet!'});
   },
 
@@ -50,6 +51,6 @@ module.exports = {
       })
     req.flash('success_msg', 'You are registed and can now login');
 
-    res.redirect('/');
+    res.redirect('/login');
   },
 };
