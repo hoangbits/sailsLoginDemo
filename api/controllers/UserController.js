@@ -4,6 +4,7 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var passport = require('passport');
 
 module.exports = {
   /**
@@ -19,23 +20,39 @@ module.exports = {
    * `UserController.login()`
    */
   login: (req, res) => {
-
-    return res.json({todo: 'login() is not implemented yet!'});
+    passport.authenticate('local', (err, user, info) => { //failure redirect
+      if (err) {
+        return res.negotiate(err);
+      }
+      if (!user) {
+        return res.view('user/login', {
+          error_msg: info.message,
+          layout: 'template'
+        });
+      }
+      req.login(user, (err) => {
+        if (err) return res.negotiate(err);
+        return res.send({
+          message: info.message,
+          user: user
+        });
+      });
+    })(req, res);
   },
 
   /**
    * `UserController.logout()`
    */
   logout: (req, res) => {
-    return res.json({
-      todo: 'logout() is not implemented yet!',
-    });
+    req.logout();
+    res.redirect('/');
   },
 
   /**
    * 'UserController.signup'
    */
   processSignup: (req, res) => {
+
     let newUser = {
       username: req.param('username'),
       email: req.param('email'),
@@ -47,7 +64,6 @@ module.exports = {
         if (err) {
           throw Error(err);
         }
-        // sails.log(records);
       })
     req.flash('success_msg', 'You are registed and can now login');
 
