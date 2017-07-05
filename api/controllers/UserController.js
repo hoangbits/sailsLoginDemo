@@ -59,14 +59,31 @@ module.exports = {
       password: req.param('password'),
     };
 
-    User.create(newUser)
-      .exec((err, records) => {
-        if (err) {
-          throw Error(err);
-        }
+    req.checkBody('username', 'UserName is required').notEmpty();
+    req.checkBody('email', 'Email is required').notEmpty();
+    req.checkBody('email', 'Email is not Valid').isEmail();
+    req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('password2', 'Password does not match').equals(req.body.password);
+    let errors = req.validationErrors();
+    if (errors) {//try to remove 'return' in 'return res.view'
+      return res.view('user/signup', {
+        errors: errors,
+        layout: 'template'
       })
-    req.flash('success_msg', 'You are registed and can now login');
-
-    res.redirect('/login');
+    } else {
+      User.create(newUser)
+        .exec((err, records) => {
+          if (err) {
+            // return res.negotiate(err);
+            return res.view('user/signup', {
+              errors: err.details,
+              layout: 'template'
+            });
+          }
+        })
+      // req.flash('success_msg', 'You are registered and can now login');
+      req.addFlash('success', 'You are registered and can now login');
+      res.redirect('/login');
+    }
   },
 };

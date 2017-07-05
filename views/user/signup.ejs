@@ -1,14 +1,10 @@
 <h2 class="page-header">Register</h2>
-<% if ( typeof errors === 'object' && errors) { %>
-<% for (var prop in errors) { %>
-<div class="alert alert-danger"><%- errors[prop] %></div>
+<% if ( typeof errors !== 'undefined' && errors) { %>
+<% for (var element in errors) { %>
+<div class="alert alert-danger"><%- errors[element].msg %></div>
 <% } %>
 <% } %>
 <form method="post" action="/signup">
-  <!--<div class="form-group">-->
-    <!--<label>Name</label>-->
-    <!--<input type="text" class="form-control" placeholder="Name" name="name">-->
-  <!--</div>-->
   <div class="form-group">
     <label>Username</label>
     <input type="text" class="form-control" placeholder="Username" name="username">

@@ -56,6 +56,9 @@
       <% if (typeof success_msg !== 'undefined' && success_msg) { %>
       <div class="alert alert-success"><%= success_msg %></div>
       <% } %>
+      <% if (req.flash('success_msg').length !== 0) { %>
+      <div class="alert alert-success"><%- req.flash('success_msg') %></div>
+      <% } %>
       <% if(typeof error_msg !== 'undefined'){ %>
       <div class="alert alert-danger"><%= error_msg %></div>
       <% } %>
