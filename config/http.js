@@ -26,6 +26,7 @@ module.exports.http = {
     passportInit: require('passport').initialize(),
     passportSession: require('passport').session(),
     expressValidator: require('express-validator')(),
+    flash: require('connect-flash')(),
     /***************************************************************************
      *                                                                          *
      * The order in which middleware should be run for HTTP request. (the Sails *
@@ -39,6 +40,7 @@ module.exports.http = {
       'session',
       'passportInit',
       'passportSession ',
+      'flash',
       'myRequestLogger',
       'expressValidator',
       'bodyParser',
@@ -60,11 +62,10 @@ module.exports.http = {
      *                                                                           *
      ****************************************************************************/
 
-// myRequestLogger: function (req, res, next) {
-//     console.log("Requested :: ", req.method, req.url);
-//     return next();
-// }
-
+    // myRequestLogger: function (req, res, next) {
+    //     console.log("Requested :: ", req.method, req.url);
+    //     return next();
+    // }
 
     /***************************************************************************
      *                                                                          *

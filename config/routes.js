@@ -35,17 +35,8 @@ module.exports.routes = {
   //   view: 'homepage',
   // },
 
-
+  //HTML View
   '/': 'UserController.index',
-  /***************************************************************************
-   *                                                                          *
-   * Custom routes here...                                                    *
-   *                                                                          *
-   * If a request to a URL doesn't match any of the custom routes above, it   *
-   * is matched against Sails route blueprints. See `config/blueprints.js`    *
-   * for configuration options and examples.                                  *
-   *                                                                          *
-   ***************************************************************************/
   '/index': 'UserController.index',
   'get /signup': {
     view: 'user/signup',
@@ -53,14 +44,15 @@ module.exports.routes = {
       layout: 'template',
     },
   },
-  'post /signup': 'UserController.processSignup',
   'get /login': {
     view: 'user/login',
     locals: {
       layout: 'template',
     },
   },
+  
+  // Endpoints
   'post /login': 'UserController.login',
-  '/logout': 'UserController.logout'
-
+  'post /signup': 'UserController.processSignup',
+  '/logout': 'UserController.logout',
 };

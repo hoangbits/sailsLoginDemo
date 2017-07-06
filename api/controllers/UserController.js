@@ -68,7 +68,7 @@ module.exports = {
     if (errors) {//try to remove 'return' in 'return res.view'
       return res.view('user/signup', {
         errors: errors,
-        layout: 'template'
+        layout: 'template',
       })
     } else {
       User.create(newUser)
@@ -81,8 +81,7 @@ module.exports = {
             });
           }
         })
-      // req.flash('success_msg', 'You are registered and can now login');
-      req.addFlash('success', 'You are registered and can now login');
+      req.flash('success_msg', 'You are registered and can now login');
       res.redirect('/login');
     }
   },
