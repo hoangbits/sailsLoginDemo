@@ -31,9 +31,6 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  // '/': {
-  //   view: 'homepage',
-  // },
 
   //HTML View
   '/': 'UserController.index',
@@ -50,7 +47,7 @@ module.exports.routes = {
       layout: 'template',
     },
   },
-  
+
   // Endpoints
   'post /login': 'UserController.login',
   'post /signup': 'UserController.processSignup',

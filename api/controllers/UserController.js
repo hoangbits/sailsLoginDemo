@@ -11,8 +11,8 @@ module.exports = {
    * `UserController.index()`
    */
   index: (req, res) => {
-    return res.json({
-      todo: 'index() is not implemented yet!',
+    return res.view('user/index', {
+      layout: 'template'
     });
   },
 
@@ -32,10 +32,9 @@ module.exports = {
       }
       req.login(user, (err) => {
         if (err) return res.negotiate(err);
-        return res.send({
-          message: info.message,
-          user: user
-        });
+        //remembering user in session
+        req.session.me = user.id;
+        return res.redirect('/');
       });
     })(req, res);
   },
@@ -45,6 +44,9 @@ module.exports = {
    */
   logout: (req, res) => {
     req.logout();
+    req.flash('success_msg', 'You are logged out');
+    //forget user
+    req.session.me = null;
     res.redirect('/');
   },
 
