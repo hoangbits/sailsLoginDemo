@@ -31,7 +31,8 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js"
   },
   "main": "app.js",
   "repository": {
@@ -41,7 +42,14 @@
   "author": "hoang",
   "license": "",
   "devDependencies": {
+    "chai": "^4.1.0",
+    "chai-http": "^3.0.0",
     "eslint": "^4.1.1",
-    "eslint-config-google": "^0.8.0"
+    "eslint-config-google": "^0.8.0",
+    "mocha": "^3.4.2",
+    "mochawesome": "^2.3.0",
+    "superagent": "^3.5.2",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2"
   }
 }
