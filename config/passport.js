@@ -26,10 +26,11 @@ passport.use(
         }
         bcrypt.compare(password, user.password, (err, res) => {
           if (!res) {
-            return done(null, false, {message: 'Invalid password'})
+            return done(null, false, {message: 'Invalid password'});
           }
           return done(null, user, {message: 'Logged In Successfully'});
-        })
-      })
+        });
+      });
     }
-  ));
+    )
+);

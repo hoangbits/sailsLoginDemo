@@ -31,7 +31,6 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-
   //HTML View
   '/': 'UserController.index',
   '/index': 'UserController.index',

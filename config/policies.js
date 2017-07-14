@@ -16,9 +16,7 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.policies.html
  */
 
-
 module.exports.policies = {
-
   /***************************************************************************
    *                                                                          *
    * Default policy for all controllers and actions (`true` allows public     *
@@ -37,8 +35,8 @@ module.exports.policies = {
   UserController: {
     '*': 'isAuthenticated',
     login: true,
-    processSignup: true
-  }
+    processSignup: true,
+  },
   // RabbitController: {
 
   // Apply the `false` policy as the default for all of RabbitController's actions
