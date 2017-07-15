@@ -31,13 +31,12 @@ module.exports = {
           layout: 'template',
         });
       }
+
       req.login(user, err => {
         if (err) return res.negotiate(err);
         //remembering user in session
         req.session.me = user.id;
         req.flash('success_msg', info.message);
-        res.myData = { sad: 'somg' };
-        console.log(res);
         return res.redirect('/');
       });
     })(req, res);
