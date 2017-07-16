@@ -32,7 +32,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "test": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js"
+    "test": "node ./node_modules/nyc/bin/nyc --reporter=html ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/**/*.test.js"
   },
   "main": "app.js",
   "repository": {
@@ -46,10 +46,15 @@
     "chai-http": "^3.0.0",
     "eslint": "^4.1.1",
     "eslint-config-google": "^0.8.0",
+    "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "mochawesome": "^2.3.0",
+    "nyc": "^11.0.3",
     "superagent": "^3.5.2",
     "supertest": "^3.0.0",
     "supertest-as-promised": "^4.0.2"
+  },
+  "nyc": {
+    "exclude": ["api/responses", "test", "tasks", "config"]
   }
 }
