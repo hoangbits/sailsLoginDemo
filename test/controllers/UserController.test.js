@@ -7,11 +7,18 @@ var request = require("supertest");
 // var should = chai.should();  // Using Should style
 
 describe("UserController", () => {
-  var authRequest;
-  var account = {
+  let authRequest;
+  let account = {
     username: "hoang",
     email: "hoang@mail.com",
     password: "hoang"
+  };
+
+  let accountSignup = {
+    username: "giang",
+    email: "giang@mail.com",
+    password: "giang",
+    password2: "giang"
   };
 
   before(done => {
@@ -40,7 +47,7 @@ describe("UserController", () => {
       });
   });
 
-  describe("#index", () => {
+  describe("#index()", () => {
     it("should allow access to index when user logged in", done => {
       authRequest.get("/index").expect(200).end((err, res) => {
         if (err) return done(err);
@@ -92,7 +99,7 @@ describe("UserController", () => {
         });
     });
 
-    it("should redirect to / if user logged success", done => {
+    it("should redirect to / if user logged in success", done => {
       request(sails.hooks.http.app)
         .post("/login")
         .send({ username: account.username, password: account.password })
@@ -101,6 +108,120 @@ describe("UserController", () => {
         .end((err, res) => {
           if (err) return done(err);
           done();
+        });
+    });
+  });
+
+  describe("#logout()", () => {
+    it("should redirect to / if user logged out success", done => {
+      authRequest
+        .post("/logout")
+        .expect(302)
+        .expect("location", "/")
+        .end((err, res) => {
+          if (err) return done(err);
+          done();
+        });
+    });
+  });
+
+  describe("#processSignUp", () => {
+    it("should warning 'UserName is required' username if guest isn't input username", done => {
+      request(sails.hooks.http.app)
+        .post("/signup")
+        .send({
+          username: "",
+          email: accountSignup.email,
+          password: accountSignup.password,
+          password2: accountSignup.password2
+        })
+        .expect(200)
+        .expect(/UserName is required/)
+        .end((err, res) => {
+          if (err) done(err);
+          done(err);
+        });
+    });
+
+    it("should warning 'Email is required' if guest isn't input email", done => {
+      request(sails.hooks.http.app)
+        .post("/signup")
+        .send({
+          username: accountSignup.username,
+          email: "",
+          password: accountSignup.password,
+          password2: accountSignup.password2
+        })
+        .expect(200)
+        .expect(/Email is required/)
+        .end((err, res) => {
+          if (err) done(err);
+          done(err);
+        });
+    });
+
+    it("should notify 'email is not valid' if guest isn't input email", done => {
+      request(sails.hooks.http.app)
+        .post("/signup")
+        .send({
+          username: accountSignup.username,
+          email: "email_without_at_sign",
+          password: accountSignup.password,
+          password2: accountSignup.password2
+        })
+        .expect(200)
+        .expect(/Email is not Valid/)
+        .end((err, res) => {
+          if (err) done(err);
+          done(err);
+        });
+    });
+    it("should notify 'Password is required' if guest isn't input password", done => {
+      request(sails.hooks.http.app)
+        .post("/signup")
+        .send({
+          username: accountSignup.username,
+          email: accountSignup.email,
+          password: "",
+          password2: accountSignup.password2
+        })
+        .expect(200)
+        .expect(/Password is required/)
+        .end((err, res) => {
+          if (err) done(err);
+          done(err);
+        });
+    });
+    it("should notify 'Password does not match' if guest make typo mistake", done => {
+      request(sails.hooks.http.app)
+        .post("/signup")
+        .send({
+          username: accountSignup.username,
+          email: accountSignup.email,
+          password: accountSignup.password,
+          password2: ""
+        })
+        .expect(200)
+        .expect(/Password does not match/)
+        .end((err, res) => {
+          if (err) done(err);
+          done(err);
+        });
+    });
+    it("should redirect to login page", done => {
+      request(sails.hooks.http.app)
+        .post("/signup")
+        .send({
+          username: accountSignup.username,
+          email: accountSignup.email,
+          password: accountSignup.password,
+          password2: accountSignup.password2
+        })
+        .expect(302)
+        .expect("location", "/login")
+        .end((err, res) => {
+          if (err) return done(err);
+          done(err);
         });
     });
   });
