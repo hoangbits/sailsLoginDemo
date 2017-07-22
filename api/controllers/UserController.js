@@ -6,6 +6,8 @@
  */
 var passport = require('passport');
 
+var redis = require('redis'),
+  client = redis.createClient();
 module.exports = {
   /**
    * `UserController.index()`

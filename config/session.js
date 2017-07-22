@@ -13,7 +13,6 @@
  */
 
 module.exports.session = {
-
   /***************************************************************************
   *                                                                          *
   * Session secret is automatically generated when your new app is created   *
@@ -44,7 +43,7 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'redis',
+  adapter: 'connect-redis',
 
   /***************************************************************************
   *                                                                          *
@@ -61,7 +60,6 @@ module.exports.session = {
   // db: 0,
   // pass: <redis auth password>,
   // prefix: 'sess:',
-
 
   /***************************************************************************
   *                                                                          *
@@ -96,5 +94,4 @@ module.exports.session = {
   //     ssl: true
   //   }
   // }
-
 };
