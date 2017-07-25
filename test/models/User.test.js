@@ -74,4 +74,39 @@ describe('models/User', () => {
         .catch(done);
     });
   });
+  describe('#User.beforeUpdate ', () => {
+    let account = {
+      username: 'testuser',
+      email: 'testemail@mail.com',
+      password: 'testpassword',
+    };
+    let user = {};
+    beforeEach(done => {
+      User.create(account)
+        .then(record => {
+          user = record;
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should encrypt password before User object', done => {
+      let passW = { password: 'password' };
+      User.beforeUpdate(passW, (err, values) => {
+        expect(values.password).to.not.equal(account.password);
+        if (err) return done(err);
+        done();
+      });
+    });
+    it('should save encrypted data into database', () => {
+      assert.notEqual(user.password, account.password);
+    });
+    afterEach(done => {
+      User.destroy({ username: user.username })
+        .then(res => {
+          done();
+        })
+        .catch(done);
+    });
+  });
 });
