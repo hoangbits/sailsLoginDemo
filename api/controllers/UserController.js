@@ -80,17 +80,17 @@ module.exports = {
         layout: 'template',
       });
     } else {
-      User.create(newUser).exec((err, records) => {
-        if (err) {
-          // return res.negotiate(err);
+      User.create(newUser)
+        .then(records => {
+          req.flash('success_msg', 'You are registered and can now login');
+          res.redirect('/login');
+        })
+        .catch(err => {
           return res.view('user/signup', {
             errors: err.details,
             layout: 'template',
           });
-        }
-      });
-      req.flash('success_msg', 'You are registered and can now login');
-      res.redirect('/login');
+        });
     }
   },
 };

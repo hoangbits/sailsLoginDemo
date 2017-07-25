@@ -11,14 +11,14 @@ module.exports.seeds = {
   user: {
     data: [
       {
-        username: 'hoang',
-        email: 'giahoangth@gmail.com',
-        password: 'giahoang',
+        username: 'seedhoang',
+        email: 'seedhoang@gmail.com',
+        password: 'seedhoang',
       },
       {
-        username: 'giang',
-        email: 'legiagiang@yahoo.com',
-        password: 'giagiang',
+        username: 'seedgiang',
+        email: 'seedgiang@yahoo.com',
+        password: 'seedgiang',
       },
     ],
     overwrite: true,

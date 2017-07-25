@@ -25,37 +25,39 @@ var hashPassword = password => {
 
 module.exports = {
   attributes: {
-    username: {type: 'string', required: true, unique: true},
+    username: { type: 'string', required: true, unique: true },
 
-    email: {type: 'string', required: true, unique: true},
+    email: { type: 'string', required: true, unique: true },
 
-    password: {type: 'string'},
+    password: { type: 'string' },
+    toJSON: function() {
+      var user = this.toObject();
+      delete user.password;
+      delete user.createdAt;
+      delete user.updatedAt;
+      return user;
+    },
   },
 
   beforeCreate: (values, callback) => {
     hashPassword(values.password)
       .then(hash => {
         values.password = hash;
-        callback(undefined, values);
+        callback(null, values);
       })
       .catch(err => {
-        sails.log('catch in model');
         callback(err);
       });
   },
 
   beforeUpdate: (values, callback) => {
-    if (values.password) {
-      hashPassword(values.password)
-        .then(hash => {
-          values.password = hash;
-          callback(null, values);
-        })
-        .catch(err => {
-          callback(err);
-        });
-    } else {
-      next();
-    }
+    hashPassword(values.password)
+      .then(hash => {
+        values.password = hash;
+        callback(null, values);
+      })
+      .catch(err => {
+        callback(err);
+      });
   },
 };
